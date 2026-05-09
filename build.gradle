@@ -1,0 +1,25 @@
+//указываем какой язык программирования используем
+
+plugins {
+    id 'java-library'
+}
+
+//указываем что используем центральный прокси репозитарий для скачивания библиотек типо Selenide и зависимостей
+
+repositories {
+    mavenCentral()
+}
+
+// добавляем селинид
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:6.0.3",
+            "com.codeborne:selenide:7.16.1",
+            "org.slf4j:slf4j-simple:2.0.17"
+    )
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-// добавляем селинид
+// добавляем зависимости
 
 dependencies {
     testImplementation(
@@ -20,6 +20,7 @@ dependencies {
     )
 }
 
+// этот метод включает JUnit. Появляются зеленые плеи у тестов
 test {
     useJUnitPlatform()
 }

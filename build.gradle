@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     testImplementation(
-            "org.junit.jupiter:junit-jupiter:6.0.3",
+            "org.junit.jupiter:junit-jupiter:5.10.2",
             "com.codeborne:selenide:7.16.1",
             "org.slf4j:slf4j-simple:2.0.17"
     )

@@ -2,7 +2,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestBoxTests {
@@ -29,6 +29,49 @@ public class TestBoxTests {
         $("[id=output]").$("[id=currentAddress]").shouldHave(text("Adress 1"));
         $("[id=output]").$("[id=permanentAddress]").shouldHave(text("Adress 2"));
 
-        sleep(10000);
+        sleep(5000);
     }
+
+    @Test
+    void invalidEmailTest() {
+        open("/text-box");
+        $("#userEmail").setValue("not-an-email");
+        $("#submit").click();
+
+        // Проверяем, что поле email подсветилось красным (появился CSS-класс ошибки)
+        $("#userEmail").shouldHave(cssClass("field-error"));
+        // Проверяем, что блок с результатом не отобразился
+        $("#output").shouldNot(be(visible));
+
+        sleep(5000);
+    }
+
+    @Test
+    void emptyFormSubmitTest() {
+        open("/text-box");
+        $("#submit").click();
+
+        // Проверяем, что блок с выводом данных отсутствует в DOM или не виден
+        $("#output").shouldNot(be(visible));
+        // Дополнительно: проверяем, что значения не заполнились (если id=name все же есть в DOM)
+        $("#output #name").shouldNot(exist);
+
+        sleep(5000);
+    }
+
+    @Test
+    void incompleteEmailTest() {
+        open("/text-box");
+        $("#userName").setValue("Sergey");
+        $("#userEmail").setValue("sergey@missingdomain"); // Без .ru/.com и т.д.
+        $("#submit").click();
+
+        // Проверяем наличие класса ошибки у поля
+        $("#userEmail").shouldHave(cssClass("field-error"));
+        // Проверяем, что имя "Sergey" не появилось в итоговом блоке, так как форма не отправилась
+        $("#output").shouldNot(be(visible));
+
+        sleep(5000);
+    }
+
 }

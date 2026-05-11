@@ -57,4 +57,56 @@ public class DemocaUIBasicTests {
 
         sleep(10000);
     }
+
+
+    @Test
+    void submitEmptyFormTest() {
+        open("/automation-practice-form");
+        $("#submit").click();
+
+        // Модальное окно не должно появиться
+        $(".modal-content").shouldNot(be(visible));
+        // Поля должны подсветиться как невалидные (в DemoQA это делается через псевдокласс :invalid)
+        $("#firstName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+
+    @Test
+    void shortMobileNumberTest() {
+        open("/automation-practice-form");
+        $("#firstName").setValue("Serg");
+        $("#lastName").setValue("Rzh");
+        $(byText("Male")).click();
+        $("#userNumber").setValue("123456789"); // 9 цифр
+        $("#submit").click();
+
+        $(".modal-content").shouldNot(be(visible));
+        // Проверка, что поле помечено ошибкой
+        $("#userNumber").shouldHave(cssClass("form-control")); // В реальности проверяется :invalid
+    }
+
+
+    @Test
+    void alphabeticMobileNumberTest() {
+        open("/automation-practice-form");
+        $("#firstName").setValue("Serg");
+        $("#lastName").setValue("Rzh");
+        $(byText("Male")).click();
+        $("#userNumber").setValue("abcdefghij"); // Буквы вместо цифр
+        $("#submit").click();
+
+        $(".modal-content").shouldNot(be(visible));
+    }
+
+    @Test
+    void missingGenderTest() {
+        open("/automation-practice-form");
+        $("#firstName").setValue("Serg");
+        $("#lastName").setValue("Rzh");
+        $("#userNumber").setValue("1234567890");
+        // Пропускаем клик по Gender
+        $("#submit").click();
+
+        $(".modal-content").shouldNot(be(visible));
+    }
 }

@@ -15,7 +15,6 @@ public class DemocaUiTests {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
         Configuration.timeout = 5000;
     }
 
@@ -32,8 +31,7 @@ public class DemocaUiTests {
         $("#dateOfBirthInput").click();
         $("select.react-datepicker__month-select").selectOption("January");
         $("select.react-datepicker__year-select").selectOption("1984");
-        //$("div.react-datepicker__day:not(.react-datepicker__day--outside-month)").click();
-        $("div.react-datepicker__day--012").click();
+        $("div.react-datepicker__day--012:not(.react-datepicker__day--outside-month)").click();
 
         // Предметы
         $("#subjectsInput").setValue("Bio").pressEnter();
@@ -47,7 +45,6 @@ public class DemocaUiTests {
 
         //Картинка
         $("#uploadPicture").uploadFromClasspath("img.png"); //добавлена папка test/resources вложен файл img.png
-        //$("input#uploadPicture").sendKeys("C:\\Users\\mesoi\\IdeaProjects\\qa_guru_41_2\\img.png");
 
         //штат и город
         $("#state").scrollTo().shouldBe(interactable).click();
@@ -87,6 +84,5 @@ public class DemocaUiTests {
         // Закрытие модального окна
         $("#closeLargeModal").click();
 
-        sleep(10000);
     }
 }

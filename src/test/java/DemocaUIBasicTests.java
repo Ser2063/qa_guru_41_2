@@ -14,7 +14,6 @@ public class DemocaUIBasicTests {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
         Configuration.timeout = 5000;
     }
 
@@ -23,7 +22,7 @@ public class DemocaUIBasicTests {
         open("/automation-practice-form");
         $("#firstName").setValue("Serg");
         $("#lastName").setValue("Rzh");
-        //$("#userEmail").setValue("jc@mail.ru");
+        $("#userEmail").setValue("jc@mail.ru");
         $$("#genterWrapper label").filterBy(text("Male")).first().click();
         $("#userNumber").setValue("12345678901");
 
@@ -31,8 +30,7 @@ public class DemocaUIBasicTests {
         $("#dateOfBirthInput").click();
         $("select.react-datepicker__month-select").selectOption("January");
         $("select.react-datepicker__year-select").selectOption("1984");
-        //$("div.react-datepicker__day:not(.react-datepicker__day--outside-month)").click();
-        $("div.react-datepicker__day--012").click();
+        $("div.react-datepicker__day--012:not(.react-datepicker__day--outside-month)").click();
 
 
         //нажимаем кнопку
@@ -46,6 +44,8 @@ public class DemocaUIBasicTests {
         $(".table-responsive")
                 .$(byText("Student Name")).parent().shouldHave(text("Serg Rzh"));
         $(".table-responsive")
+                .$(byText("Student Email")).parent().shouldHave(text("jc@mail.ru"));
+        $(".table-responsive")
                 .$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive")
                 .$(byText("Mobile")).parent().shouldHave(text("1234567890"));
@@ -55,7 +55,6 @@ public class DemocaUIBasicTests {
         // Закрытие модального окна
         $("#closeLargeModal").click();
 
-        sleep(10000);
     }
 
 

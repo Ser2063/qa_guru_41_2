@@ -12,7 +12,6 @@ public class TestBoxTests {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
         Configuration.timeout = 5000;
     }
 
@@ -29,7 +28,6 @@ public class TestBoxTests {
         $("[id=output]").$("[id=currentAddress]").shouldHave(text("Adress 1"));
         $("[id=output]").$("[id=permanentAddress]").shouldHave(text("Adress 2"));
 
-        sleep(5000);
     }
 
     @Test
@@ -43,7 +41,7 @@ public class TestBoxTests {
         // Проверяем, что блок с результатом не отобразился
         $("#output").shouldNot(be(visible));
 
-        sleep(5000);
+
     }
 
     @Test
@@ -56,7 +54,6 @@ public class TestBoxTests {
         // Дополнительно: проверяем, что значения не заполнились (если id=name все же есть в DOM)
         $("#output #name").shouldNot(exist);
 
-        sleep(5000);
     }
 
     @Test
@@ -71,7 +68,6 @@ public class TestBoxTests {
         // Проверяем, что имя "Sergey" не появилось в итоговом блоке, так как форма не отправилась
         $("#output").shouldNot(be(visible));
 
-        sleep(5000);
     }
 
 }
